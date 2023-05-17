@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+	<title>Form</title>
+</head>
+<body>
+
+	<div class="container">
+		<form method="get" id="submit">
+		<h1>Вход</h1>
+		<label for="uname"><b>Username</b></label>
+			<input  type="text" id="mes1" name="uname" value="" placeholder="Логин">
+		<label for="psw"><b>Password</b></label>
+			<input type="password" id="mes2" name="psw" value="" placeholder="Пароль">
+		</div>
+		<button type="submit" onclick="click()" id="sub2">Login</button>
+		<a href="registration.html" class="registration">Регистрация</a>
+		</form>
+		<div class="error-message"><p id="error-message" ></p></div>
+	</div>
+</body>
+<script>
+window.onload = function() {
+	document.querySelector("#sub2").onclick = function () {
+
+		if((document.getElementById("mes1").value == '') || (document.getElementById("mes2").value == '') /*|| (document.getElementById("mes1").value.length > 30) || (document.getElementById("mes2").value.length > 30)*/)
+		{
+			console.log("can not post")
+			return false
+		}
+		fetch('http://127.0.0.1:5000/login', {
+	    method: 'POST',
+	    headers: {
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify({ "login" : document.getElementById("mes1").value, "pass" : document.getElementById("mes2").value})
+		})
+	   .then(response => response.json())
+	   .then(response => console.log(JSON.stringify(response)))
+	}
+
+/*    document.querySelector("#sub").onclick = function(){
+
+        if((document.getElementById("mes1").value == '') || (document.getElementById("mes2").value == '') || (document.getElementById("mes1").value.length > 30) || (document.getElementById("mes2").value.length > 30))
+        {
+            console.log("can not post")
+            return false
+        }
+//        console.log(document.getElementById("mes1").value)
+//        console.log(document.getElementById("mes2").value)
+        var xhr = new XMLHttpRequest()
+        xhr.open("POST", "http:127.0.0.1:5000/login", true)
+		xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+		xhr.onload = function () {
+            var newMessages = JSON.parse(this.responseText)
+            console.log(newMessages)
+            if (newMessages.status == "ok") {
+                document.cookie = "login=" + newMessages.name
+                document.cookie = "pass=" + newMessages.pass
+                setTimeout(profile, 50)
+            }
+            else {
+                document.getElementById("error-message").innerHTML = "Неверный логин или пароль"
+            }
+        }
+		xhr.send(JSON.stringify({ "login" : document.getElementById("mes1").value, "pass" : document.getElementById("mes2").value}))
+        document.getElementById("mes1").value = ''
+        document.getElementById("mes2").value = ''
+        return true
+    }*/
+}
+function profile() {
+    window.location.href = "acc.html";
+}
+</script>
+</html>

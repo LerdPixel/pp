@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link rel="stylesheet" href="style.css">
+    <style>
+	body {
+			background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(pullOutTheAdamApple.jpg);
+			-webkit-background-size: cover;
+			background-size: cover;
+			background-attachment: fixed;
+			font-family: sans-serif;
+		}
+	</style>
+	<script src="script.js"></script>
+</head>
+<body>
+	<div class="form">
+		<form method="GET" id="submit">
+		<h1>Регистрация</h1>
+		<div class="input-form">
+			<input  type="name" id="mes1" name="message1" value="" placeholder="Электронная почта(логин)">
+		</div>
+		<div class="input-form">
+			<input type="password" id="mes2" name="message2" value="" placeholder="Пароль">
+		</div>
+		<div class="input-form">
+			<input type="submit" onclick="click()" id="sub" value="Зарегистрироваться">
+		</div>
+		<a href="login.html" class="registration">Вход</a>
+		</form>
+		<div class="error-message"><p id="error-message" ></p></div>
+	</div>
+</body>
+</html>
